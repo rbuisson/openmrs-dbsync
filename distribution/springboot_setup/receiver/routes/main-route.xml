@@ -1,0 +1,31 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="main" errorHandlerRef="deadLetterChannelBuilder">
+        <from uri="{{camel.input.endpoint}}" />
+        <!--<process ref="pgpDecryptService"/>-->
+        <log message=":" />
+
+        <log message="Received entity-payload: ${body}" />
+
+        <setProperty name="entity-payload">
+            <simple>${body}</simple>
+        </setProperty>
+
+        <log message="Configured destinations -> {{entity-payload.destinations}}" />
+
+        <split stopOnException="true">
+            <simple>{{entity-payload.destinations}}</simple>
+            <setProperty name="entity-payload-destination">
+                <simple>${body}</simple>
+            </setProperty>
+
+            <log message="Publishing to destination: ${exchangeProperty.entity-payload-destination}" />
+
+            <setBody>
+                <simple>${exchangeProperty.entity-payload}</simple>
+            </setBody>
+            
+            <toD uri="direct:${exchangeProperty.entity-payload-destination}" />
+
+        </split>
+    </route>
+</routes>
