@@ -9,7 +9,7 @@ import org.openmrs.sync.component.service.AbstractEntityService;
 import org.openmrs.sync.component.service.TableToSyncEnum;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class EncounterDiagnosisService extends AbstractEntityService<EncounterDiagnosis, EncounterDiagnosisModel> {
 
     public EncounterDiagnosisService(final SyncEntityRepository<EncounterDiagnosis> repository,
@@ -20,6 +20,6 @@ public class EncounterDiagnosisService extends AbstractEntityService<EncounterDi
 
     @Override
     public TableToSyncEnum getTableToSync() {
-        return TableToSyncEnum.ENCOUNTER_DIAGNOSIS;
+        return null; // TableToSyncEnum.ENCOUNTER_DIAGNOSIS;
     }
 }

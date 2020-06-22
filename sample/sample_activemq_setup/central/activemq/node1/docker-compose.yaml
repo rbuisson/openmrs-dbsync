@@ -20,7 +20,7 @@ services:
     networks:
       activemq-network:
         ipv4_address: 172.28.0.2
-    volumes: 
+    volumes:
       - ./conf:/opt/activemq/conf
       - ../data:/data/activemq
       - ./log:/var/log/activemq
